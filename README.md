@@ -8,7 +8,7 @@ In the project directory, you can run:
 
 ### `cd server`
 
-### `node run dev`
+### `npm run dev`
 
 ### `cd ..`
 
