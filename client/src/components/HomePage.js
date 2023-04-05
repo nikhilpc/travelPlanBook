@@ -3,34 +3,55 @@ import styledComponents from "styled-components";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 const HomePage = () => {
+  let a = ""
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState([]);
 
   const countrySelected = (e) => {
     setCountry(e.target.textContent);
   };
+
+
+  const navigateToBlog =  e => {
+    e.preventDefault();
+    if(country){
+      window.location.href = `${country}/blog`;
+    }
+    else{
+      window.location.href = "/allblogs";
+    }
+    
+  };
+
+
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/independent?status=true")
       .then((res) => res.json())
-      .then((data) => {setCountries(data);
+      .then((data) => {
+        setCountries(data);
       });
   }, []);
 
   return (
     <>
-    <MainHeading>Budget Travel Guide</MainHeading>
+      <MainHeading>Budget Travel Guide</MainHeading>
       <SearchDiv>
         <BannerImage src={image} alt="logo" />
         <Form>
-         
-         {country === "" ? <input type="text" placeholder="Enter country name:" autoFocus/> : <input type="text" value={country} autoFocus/>}
-          <Button type="submit">Search</Button>
+          {country === "" ? (
+            <input type="text" placeholder="Enter country name:" autoFocus />
+          ) : (
+            <input type="text" value={country} autoFocus />
+          )}
+          <Button type="submit" onClick={(e)=>navigateToBlog(e, a)}>Search</Button>
         </Form>
       </SearchDiv>
       <H1>List of Countries</H1>
       <CountryList>
         {countries.map((country) => (
-          <CountryButton key={country.name.common} onClick={countrySelected} >{country.name.common}</CountryButton>
+          <CountryButton key={country.name.common} onClick={countrySelected}>
+            {country.name.common}
+          </CountryButton>
         ))}
       </CountryList>
     </>
@@ -42,11 +63,11 @@ const MainHeading = styledComponents.h1`
     position:relative;
     left: 35vw;
     color: Orange;
-    `
+    `;
 const H1 = styledComponents.h1`
     font-size: 12px;
     padding-left: 10px;
-    `
+    `;
 const CountryButton = styledComponents.button`
     font-size: 8px;
     padding: 10px;
