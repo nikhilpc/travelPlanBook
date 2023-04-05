@@ -3,16 +3,16 @@ import styledComponents from "styled-components";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 const HomePage = () => {
-  const [country1, setCountry1] = useState("");
+  const [country, setCountry] = useState("");
   const [countries, setCountries] = useState([]);
 
+  const countrySelected = (e) => {
+    setCountry(e.target.textContent);
+  };
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/independent?status=true")
       .then((res) => res.json())
-      .then((data) => {
-        // data.map((country) => {
-        //   setCountry1(country.name.official)})})
-        setCountries(data);
+      .then((data) => {setCountries(data);
       });
   }, []);
 
@@ -22,14 +22,15 @@ const HomePage = () => {
       <SearchDiv>
         <BannerImage src={image} alt="logo" />
         <Form>
-          <input type="text" placeholder="Enter country name:" />
+         
+         {country === "" ? <input type="text" placeholder="Enter country name:" autoFocus/> : <input type="text" value={country} autoFocus/>}
           <Button type="submit">Search</Button>
         </Form>
       </SearchDiv>
       <H1>List of Countries</H1>
       <CountryList>
         {countries.map((country) => (
-          <CountryButton key={country.name.common} >{country.name.common}</CountryButton>
+          <CountryButton key={country.name.common} onClick={countrySelected} >{country.name.common}</CountryButton>
         ))}
       </CountryList>
     </>
