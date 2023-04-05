@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import HomePage from './HomePage'
+
+
+
 const App = ()=> {
 
   const [backendData, setBackendData] = useState([{}])
@@ -7,11 +11,7 @@ const App = ()=> {
     fetch("/api").then(res => res.json()).then(data => setBackendData(data))
   }, [])
   return (
-    <div>
-      {
-      backendData.users === undefined? <>loadind</>:
-      backendData.users.map(item => <div>{item}</div> )}
-    </div>
+        <HomePage />
   )
 }
 
