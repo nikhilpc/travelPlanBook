@@ -3,7 +3,6 @@ import styledComponents from "styled-components";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 const HomePage = () => {
-  let a = ""
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState([]);
 
@@ -18,7 +17,7 @@ const HomePage = () => {
       window.location.href = `${country}/blog`;
     }
     else{
-      window.location.href = "/allblogs";
+      window.location.href = "/";
     }
     
   };
@@ -46,7 +45,7 @@ const HomePage = () => {
           ) : (
             <input type="text" value={country} autoFocus />
           )}
-          <Button type="submit" onClick={(e)=>navigateToBlog(e, a)}>Search</Button>
+          <Button type="submit" onClick={(e)=>navigateToBlog(e)}>Search</Button>
         </Form>
       </SearchDiv>
       <H1>List of Countries</H1>
