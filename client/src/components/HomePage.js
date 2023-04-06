@@ -34,7 +34,10 @@ const HomePage = () => {
 
   return (
     <>
+    <Headers>
       <MainHeading>Budget Travel Guide</MainHeading>
+      <AboutUs to="/about">About Us</AboutUs>
+      </Headers>
       <SearchDiv>
         <BannerImage src={image} alt="logo" />
         <Form>
@@ -58,6 +61,13 @@ const HomePage = () => {
   );
 };
 
+const Headers = styledComponents.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+`
+
 const MainHeading = styledComponents.h1`
     font-size: 50px;
     position:relative;
@@ -76,6 +86,10 @@ const CountryButton = styledComponents.button`
     margin: 10px;
 `;
 
+const AboutUs = styledComponents(Link)`
+margin-right: 30px;
+text-decoration: none;
+`
 const CountryList = styledComponents.div`
 display: flex;
 flex-wrap: wrap;  
