@@ -1,10 +1,12 @@
-const BlogsPage = () => {
+import React, { useParams } from "react-router-dom";
 
-    
+const BlogsPage = () => {
+    const { country } = useParams();
+
     return (
         <div>
-            <h1>Blogs</h1>
+            <h2>Welcome to {country}</h2>
         </div>
     )
-    }
-    export default BlogsPage;
+}
+export default BlogsPage;

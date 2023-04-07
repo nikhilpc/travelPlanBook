@@ -10,18 +10,14 @@ const HomePage = () => {
     setCountry(e.target.textContent);
   };
 
-
-  const navigateToBlog =  e => {
+  const navigateToBlog = (e) => {
     e.preventDefault();
-    if(country){
-      window.location.href = `${country}/blog`;
-    }
-    else{
+    if (country) {
+      window.location.href = `/blog/${country}`;
+    } else {
       window.location.href = "/";
     }
-    
   };
-
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/independent?status=true")
@@ -33,9 +29,9 @@ const HomePage = () => {
 
   return (
     <>
-    <Headers>
-      <MainHeading>Budget Travel Guide</MainHeading>
-      <AboutUs to="/about">About Us</AboutUs>
+      <Headers>
+        <MainHeading>Budget Travel Guide</MainHeading>
+        <AboutUs to="/about">About Us</AboutUs>
       </Headers>
       <SearchDiv>
         <BannerImage src={image} alt="logo" />
@@ -45,7 +41,9 @@ const HomePage = () => {
           ) : (
             <input type="text" value={country} autoFocus />
           )}
-          <Button type="submit" onClick={(e)=>navigateToBlog(e)}>Search</Button>
+          <Button type="submit" onClick={(e) => navigateToBlog(e)}>
+            Search
+          </Button>
         </Form>
       </SearchDiv>
       <H1>List of Countries</H1>
@@ -65,7 +63,7 @@ display: flex;
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
-`
+`;
 
 const MainHeading = styledComponents.h1`
     font-size: 50px;
@@ -88,7 +86,7 @@ const CountryButton = styledComponents.button`
 const AboutUs = styledComponents(Link)`
 margin-right: 30px;
 text-decoration: none;
-`
+`;
 const CountryList = styledComponents.div`
 display: flex;
 flex-wrap: wrap;  
@@ -114,6 +112,7 @@ margin-left: 5px;
 `;
 
 const Form = styledComponents.form`
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
