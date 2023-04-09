@@ -15,15 +15,16 @@ const BlogsPage = () => {
             });
     }, []);
     return (
-        <div>
-            <Heading>Welcome to {country}</Heading>
-            <Back onClick={() => navigate("/")}>Home</Back>
+        <>
+            <BlogPageDiv>
+                <Back onClick={() => navigate("/")}>🏠 Home</Back>
+                <Heading>Welcome to {country}</Heading>
 
+            </BlogPageDiv>
             {maps === null ? (
                 <>Loading</>
             ) : (
                 <>
-                    {" "}
                     {maps.map((item) => (
                         <BlockData>
                             <div key={item.name.common}>
@@ -33,10 +34,9 @@ const BlogsPage = () => {
                             <div key={item.population}>Population : {item.population}</div>
 
                             <div key={item.maps.googleMaps}>
-                                Google Map Link :{" "}
-                                <a href={item.maps.googleMaps}>Map of {country}</a>
+                                Google Map:<a href={item.maps.googleMaps}>Map of {country}</a>
                             </div>
-                            <div key={item.timezones}>Timezone : {item.timezones}</div>
+                            <div key={item.timezones}>Timezone : {item.timezones[0]}</div>
                             <div key={item.flags.png}>
                                 <Img src={item.flags.png} alt="flagImage"></Img>
                             </div>
@@ -44,20 +44,26 @@ const BlogsPage = () => {
                     ))}
                 </>
             )}
-        </div>
+        </>
+
     );
 };
 
+const BlogPageDiv = styledComponents.div`
+padding-left: 30px;
+display: flex;
+`
 const Back = styledComponents.button`
 :hover {
-    background-color: orange;
-    cursor: pointer;}
-    right: 10px;
-    height: 40px;
+    cursor: pointer;
+background-color: green;}
+    border-radius: 10px;
+    border: none;
+    height: 60px;
     margin-top: 30px;
     postion: absolute;
     color: blue;
-    background-color: white;`;
+    background-color: orange;`;
 
 const Img = styledComponents.img`
     margin-top: 10px;
