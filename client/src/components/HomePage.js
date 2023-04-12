@@ -2,6 +2,10 @@ import image from "../images/BannerImage.png";
 import styledComponents from "styled-components";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Profile from "./Profile";
+import LoginButton from "./LoginButton";
+import { useAuth0 } from '@auth0/auth0-react';
+
 const HomePage = () => {
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState([]);
@@ -27,11 +31,18 @@ const HomePage = () => {
       });
   }, []);
 
+  const { isLoading } = useAuth0();
+
+  if (isLoading) return <div>Loading...</div>
+
   return (
     <>
       <Headers>
         <MainHeading>Budget Travel Guide</MainHeading>
         <AboutUs to="/about">About Us</AboutUs>
+        <LoginButton />
+        { }
+        <Profile >Profile</Profile>
       </Headers>
       <SearchDiv>
         <BannerImage src={image} alt="logo" />
