@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Profile from "./Profile";
 import LoginButton from "./LoginButton";
 import { useAuth0 } from '@auth0/auth0-react';
+import LogoutButton from "./LogoutButton";
 
 const HomePage = () => {
   const [country, setCountry] = useState("");
@@ -40,10 +41,11 @@ const HomePage = () => {
       <Headers>
         <MainHeading>Budget Travel Guide</MainHeading>
         <AboutUs to="/about">About Us</AboutUs>
-        <LoginButton />
-        { }
-        <Profile >Profile</Profile>
+
       </Headers>
+      <LoginButton />
+      <LogoutButton />
+      <Profile >Profile</Profile>
       <SearchDiv>
         <BannerImage src={image} alt="logo" />
         <Form>

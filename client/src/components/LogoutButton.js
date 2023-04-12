@@ -1,16 +1,16 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import styledComponents from "styled-components";
-const LoginButton = () => {
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+const LogoutButton = () => {
+    const { logout, isAuthenticated } = useAuth0();
 
     return (
-        !isAuthenticated && (
-            <Button onClick={() => loginWithRedirect()}>
-                Log In
-            </Button>
-        )
-    )
+        (isAuthenticated && (
+            < Button onClick={() => logout()}>
+                Log out
+            </ Button>
+        )))
+
 }
 const Button = styledComponents.button`
     background-color: orange;
@@ -18,13 +18,11 @@ const Button = styledComponents.button`
     border-radius: 5px;
     color: black;
     cursor: pointer;
-    margin-left: 10px;
-    text-align: center;
+    margin-left: 90vw;
 height: 40px;
 width: 5vw;
     &:hover {
         background-color: yellow;
         color: orange;
     }`
-
-export default LoginButton
+export default LogoutButton
