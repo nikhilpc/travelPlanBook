@@ -19,7 +19,7 @@ const SearchingPage = () => {
         if (country) {
             window.location.href = `/blog/${country}`;
         } else {
-            window.location.href = "/";
+            window.location.href = "/search";
         }
     };
 

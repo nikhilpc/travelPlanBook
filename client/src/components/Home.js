@@ -6,7 +6,11 @@ const Home = () => {
   const [value, setValue] = useState("$500 - $10,000");
   let navigate = useNavigate();
   const routeChange = () => {
-    let path = "/thankyou";
+    let path = "/search";
+    navigate(path);
+  };
+  const routeChangeAgency = () => {
+    let path = "/agency";
     navigate(path);
   };
   return (
@@ -42,7 +46,7 @@ const Home = () => {
               />
             </div>
             <div className="row">
-              <Button onClick={routeChange} >Discover More</Button>
+              <Button onClick={routeChangeAgency} >Discover More</Button>
             </div>
           </form>
         </div>

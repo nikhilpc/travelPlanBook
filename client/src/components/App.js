@@ -4,6 +4,8 @@ import About from './About'
 import BlogsPage from './BlogsPage'
 import PageNotFound from './PageNotFound'
 import ThankYouPage from './ThankYouPage'
+import SearchingPage from './SearchingPage'
+import AgencySupport from './AgencySupport'
 
 
 const App = () => {
@@ -15,6 +17,8 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/thankyou" element={<ThankYouPage />} />
+        <Route path="/search" element={<SearchingPage />} />
+        <Route path="/agency" element={<AgencySupport />} />
       </Routes>
     </BrowserRouter>
 

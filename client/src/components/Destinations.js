@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Destinations = () => {
   let navigate = useNavigate();
   const routeChange = () => {
-    let path = "/thankyou";
+    let path = "/search";
     navigate(path);
   };
   // const [name, setName] = React.useState("Cuba");

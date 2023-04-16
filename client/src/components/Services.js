@@ -30,7 +30,7 @@ const Services = () => {
   ];
   let navigate = useNavigate();
   const routeChange = () => {
-    let path = "/thankyou";
+    let path = "/search";
     navigate(path);
   };
   return (
