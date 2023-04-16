@@ -1,36 +1,16 @@
-import image from "../images/BannerImage.png";
 import styledComponents from "styled-components";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Profile from "./Profile";
-import LoginButton from "./LoginButton";
 import { useAuth0 } from '@auth0/auth0-react';
-import LogoutButton from "./LogoutButton";
-
+import Destinations from "./Destinations";
+import DownloadApp from "./DownloadApp";
+import Footer from "./Footer";
+import Home from "./Home";
+import Navbar from "./Navbar";
+import Offer from "./Offer";
+import ScrollToTop from "./ScrollToTop";
+import Services from "./Services";
+import Testimonial from "./Testimonial";
+import Tours from "./Tours";
 const HomePage = () => {
-  const [country, setCountry] = useState("");
-  const [countries, setCountries] = useState([]);
-
-  const countrySelected = (e) => {
-    setCountry(e.target.textContent);
-  };
-
-  const navigateToBlog = (e) => {
-    e.preventDefault();
-    if (country) {
-      window.location.href = `/blog/${country}`;
-    } else {
-      window.location.href = "/";
-    }
-  };
-
-  useEffect(() => {
-    fetch("https://restcountries.com/v3.1/independent?status=true")
-      .then((res) => res.json())
-      .then((data) => {
-        setCountries(data);
-      });
-  }, []);
 
   const { isLoading } = useAuth0();
 
@@ -38,35 +18,17 @@ const HomePage = () => {
 
   return (
     <>
-      <Headers>
-        <MainHeading>Budget Travel Guide</MainHeading>
-        <AboutUs to="/about">About Us</AboutUs>
+      <ScrollToTop />
+      <Navbar />
+      <Home />
+      <Services />
+      <Destinations />
+      <Offer />
+      <Tours />
+      <Testimonial />
+      <DownloadApp />
+      <Footer />
 
-      </Headers>
-      <LoginButton />
-      <LogoutButton />
-      <Profile >Profile</Profile>
-      <SearchDiv>
-        <BannerImage src={image} alt="logo" />
-        <Form>
-          {country === "" ? (
-            <input type="text" placeholder="Enter country name:" autoFocus />
-          ) : (
-            <input type="text" value={country} autoFocus />
-          )}
-          <Button type="submit" onClick={(e) => navigateToBlog(e)}>
-            Search
-          </Button>
-        </Form>
-      </SearchDiv>
-      <H1>List of Countries</H1>
-      <CountryList>
-        {countries.map((country) => (
-          <CountryButton key={country.name.common} onClick={countrySelected}>
-            {country.name.common}
-          </CountryButton>
-        ))}
-      </CountryList>
     </>
   );
 };
@@ -86,63 +48,5 @@ border: 16px solid #f3f3f3;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 `
-const Headers = styledComponents.div`
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: space-between;
-`;
 
-const MainHeading = styledComponents.h1`
-    font-size: 50px;
-    position:relative;
-    left: 35vw;
-    color: Orange;
-    `;
-const H1 = styledComponents.h1`
-    font-size: 12px;
-    padding-left: 10px;
-    `;
-const CountryButton = styledComponents.button`
-    font-size: 8px;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: 10px;
-`;
-
-const AboutUs = styledComponents(Link)`
-margin-right: 30px;
-text-decoration: none;
-`;
-const CountryList = styledComponents.div`
-display: flex;
-flex-wrap: wrap;  
-max-width: 95vw;
-padding: 0 20px;
-justify-content: center;
-`;
-const BannerImage = styledComponents.img`
-    width: 30%;
-    height: 30%;
-    left: 35vw;
-    top: 5vh;
-    position: relative;
-    margin-bottom:40px;
-    `;
-const SearchDiv = styledComponents.div`
-    display: flex;
-    flex-direction: column;
-    position: relative;`;
-
-const Button = styledComponents.button`
-margin-left: 5px;
-`;
-
-const Form = styledComponents.form`
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-   `;
 export default HomePage;

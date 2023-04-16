@@ -7,13 +7,13 @@ const LoginButton = () => {
     return (
         !isAuthenticated && (
             <Button onClick={() => loginWithRedirect()}>
-                Log In
+                Login
             </Button>
         )
     )
 }
 const Button = styledComponents.button`
-    background-color: orange;
+    
     border: 1px solid orange;
     border-radius: 5px;
     color: black;
@@ -23,7 +23,6 @@ const Button = styledComponents.button`
 height: 40px;
 width: 5vw;
     &:hover {
-        background-color: yellow;
         color: orange;
     }`
 

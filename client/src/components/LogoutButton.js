@@ -13,16 +13,15 @@ const LogoutButton = () => {
 
 }
 const Button = styledComponents.button`
-    background-color: orange;
-    border: 1px solid orange;
+   border: 1px solid orange;
     border-radius: 5px;
     color: black;
     cursor: pointer;
-    margin-left: 90vw;
+    margin-left: 10px;
+    text-align: center;
 height: 40px;
 width: 5vw;
     &:hover {
-        background-color: yellow;
         color: orange;
     }`
 export default LogoutButton
