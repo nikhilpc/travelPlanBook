@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Profile from "./Profile";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
+import SearchBar from "./SearchBar";
 
 const SearchingPage = () => {
     const [country, setCountry] = useState("");
@@ -43,16 +44,15 @@ const SearchingPage = () => {
             <Profile >Profile</Profile>
             <SearchDiv>
                 <BannerImage src={image} alt="logo" />
-                <Form>
-                    {country === "" ? (
-                        <input type="text" placeholder="Enter country name:" autoFocus />
-                    ) : (
-                        <input type="text" value={country} autoFocus />
-                    )}
+
+                <DivSearch>
+
+                    <SearchBar />
+
                     <Button type="submit" onClick={(e) => navigateToBlog(e)}>
                         Search
                     </Button>
-                </Form>
+                </DivSearch>
             </SearchDiv>
             <H1>List of Countries</H1>
             <CountryList>
@@ -118,7 +118,7 @@ const Button = styledComponents.button`
 margin-left: 5px;
 `;
 
-const Form = styledComponents.form`
+const DivSearch = styledComponents.div`
     margin-top: 10px;
     display: flex;
     flex-direction: row;

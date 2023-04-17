@@ -2,7 +2,6 @@ import React from 'react';
 import styledComponents from 'styled-components';
 import Img from '../assets/CustomerSupport.jpeg'
 import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
 const AgencySupport = () => {
     return (
         <Division>
@@ -11,7 +10,6 @@ const AgencySupport = () => {
 
             <Para>Thank you, please wait.. Our customer support specilist will contact you shortly to complete the request!</Para>
             <TextLink to="/">Back to Home </TextLink>
-            <SearchBar />
         </Division>
     )
 }
