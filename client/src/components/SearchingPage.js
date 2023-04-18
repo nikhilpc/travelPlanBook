@@ -8,12 +8,10 @@ import LogoutButton from "./LogoutButton";
 
 const SearchingPage = () => {
     const [country, setCountry] = useState("");
-    const [country1, setCountry1] = useState("")
     const [countries, setCountries] = useState([]);
 
     const countrySelected = (e) => {
         setCountry(e.target.textContent);
-        setCountry1(e.target.textContent);
         setSearchTerm(e.target.textContent);
     };
 
@@ -22,12 +20,6 @@ const SearchingPage = () => {
 
         if (country) {
             window.location.href = `/blog/${country}`;
-        } else {
-            window.location.href = "/search";
-        }
-
-        if (country1) {
-            window.location.href = `/blog/${country1}`;
         } else {
             window.location.href = "/search";
         }
@@ -59,11 +51,11 @@ const SearchingPage = () => {
 
     const handleSuggestionClick = (suggestion) => {
         setSearchTerm(suggestion);
-        setCountry1(suggestion)
+        setCountry(suggestion)
         setSuggestions([]);
     }
     return (
-        <div>
+        <>
             <Headers>
                 <LoginButton />
                 <LogoutButton />
@@ -73,33 +65,34 @@ const SearchingPage = () => {
             </Headers>
 
             <Profile >Profile</Profile>
-            <SearchDiv>
-                <BannerImage src={image} alt="logo" />
 
-                <Division>
-                    <input
-                        type="text"
-                        value={searchTerm}
-                        onChange={handleChange}
-                        placeholder="Enter Country Name"
-                        autoFocus
-                    />
-                    {suggestions.length > 0 && (
-                        <UL>
-                            {suggestions.map(suggestion => (
-                                <LI key={suggestion} onClick={() => handleSuggestionClick(suggestion)}>
-                                    {suggestion}
-                                </LI>
-                            ))}
-                        </UL>
-                    )}
+            <BannerImage src={image} alt="logo" />
 
 
-                    <Button type="submit" onClick={(e) => navigateToBlog(e)}>
-                        Search
-                    </Button>
-                </Division>
-            </SearchDiv>
+            <Division>
+                <Input
+                    type="text"
+                    value={searchTerm}
+                    onChange={handleChange}
+                    placeholder="Enter Country Name"
+                    autoFocus
+                />
+                {suggestions.length > 0 && (
+                    <UL>
+                        {suggestions.map(suggestion => (
+                            <LI key={suggestion} onClick={() => handleSuggestionClick(suggestion)}>
+                                {suggestion}
+                            </LI>
+                        ))}
+                    </UL>
+                )}
+            </Division>
+            <Button type="submit" onClick={(e) => navigateToBlog(e)}>
+                Search
+            </Button>
+
+
+
             <H1>List of Countries</H1>
             <CountryList>
                 {countries.map((country) => (
@@ -108,92 +101,90 @@ const SearchingPage = () => {
                     </CountryButton>
                 ))}
             </CountryList>
-        </div>
+        </ >
     )
 }
 
 
 const LI = styledComponents.li`
-:hover {
-    background-color: yellow;
-    cursor: pointer;
-    border: 1px solid red;
-    font-weight: bold;
+            :hover {
+                background - color: yellow;
+            cursor: pointer;
+            border: 1px solid red;
+            font-weight: bold;
 }
-list-style-type: none
+            list-style-type: none
 
-`
+            `
+
+const Input = styledComponents.input`
+            width: 15vw;
+            margin-right: 5px;
+            `
 const UL = styledComponents.ul`
-background-color: orange;
-padding: 10px;
-color: black;
-`
+            background-color: orange;
+            padding: 10px;
+            color: black;
+            width: 15vw;
+            `
 const Division = styledComponents.div`
-position: relative
-display: flex
-`
+            position: relative
+            display: flex;
+            flex-direction: row;
+            width: 30vw;
+            `
 
 const Headers = styledComponents.div`
 
-display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-        justify-content: space-between;
-    -webkit-box-align: center;
-`;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            `;
 
 const MainHeading = styledComponents.h1`
-font - size: 50px;
-position: relative;
-color: Orange;
-`;
+            font - size: 50px;
+            position: relative;
+            color: Orange;
+            `;
 const H1 = styledComponents.h1`
-font - size: 12px;
-padding - left: 10px;
-`;
+            font - size: 12px;
+            padding - left: 10px;
+            `;
 const CountryButton = styledComponents.button`
-font - size: 8px;
-padding: 10px;
-border: 1px solid black;
-border - radius: 5px;
-margin: 10px;
-`;
+            font - size: 8px;
+            padding: 10px;
+            border: 1px solid black;
+            border - radius: 5px;
+            margin: 10px;
+            `;
 
 const AboutUs = styledComponents(Link)`
-margin - right: 30px;
-text - decoration: none;
-`;
+            margin - right: 30px;
+            text - decoration: none;
+            `;
 const CountryList = styledComponents.div`
-display: flex;
-flex - wrap: wrap;
-max - width: 95vw;
-padding: 0 20px;
-justify - content: center;
-`;
+            display: flex;
+            flex - wrap: wrap;
+            max-width: 95vw;
+            padding: 0 20px;
+            justify - content: center;
+            `;
 const BannerImage = styledComponents.img`
-width: 30 %;
-height: 30 %;
-position: relative;
-margin - bottom: 40px;
-`;
-const SearchDiv = styledComponents.div`
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    align-items: center;
-`;
+            width: 30 %;
+            height: 30 %;
+            left: 30vw;
+            position: relative;
+            `;
 
 
 const Button = styledComponents.button`
-margin - left: 5px;
-`;
+position: relative;
+bottom: 1.5vw;
+width: 5vw;
+left: 30vw;
+            `;
 
-const DivSearch = styledComponents.div`
-margin - top: 10px;
-display: flex;
-flex - direction: row;
-justify - content: center;
-
-`;
 export default SearchingPage
