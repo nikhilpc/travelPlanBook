@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styledComponents from "styled-components";
 import { useNavigate } from "react-router-dom";
+import BlogForm from "./BlogForm";
 const BlogsPage = () => {
     const navigate = useNavigate();
     const { country } = useParams();
     const [maps, setMap] = useState(null);
+    const [blogs, setBlogs] = useState(null);
 
     useEffect(() => {
         fetch(`https://restcountries.com/v3.1/name/${country}/?fullText=true`)
@@ -14,6 +16,7 @@ const BlogsPage = () => {
                 setMap(data);
             });
     }, []);
+
     return (
         <>
             <BlogPageDiv>
@@ -44,6 +47,12 @@ const BlogsPage = () => {
                     ))}
                 </>
             )}
+
+            <h1>Blogs about {country}</h1>
+            <h2>Title</h2>
+            <h3>{country} is one of the famous tourist location in the world!</h3>
+            <h3>{blogs}</h3>
+            <BlogForm />
         </>
 
     );
