@@ -1,49 +1,53 @@
-"use strict";
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
-const cors = require("cors");
+const express = require("express");
 const { MongoClient } = require("mongodb");
+const morgan = require("morgan");
+const { addPosting } = require("./handlers");
+const cors = require("cors");
+require("dotenv").config();
+const MONGO_URI = process.env.REACT_APP_MONGO_URI;
 
-app.use(
-    cors({
-        origin: "*",
-    })
-)
-const URI = "mongodb+srv://nikhil1:nikhil123@cluster0.w3aqys7.mongodb.net/?retryWrites=true&w=majority"
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+};
 
-async function connect() {
-    try {
-        await mongoose.connect(URI)
-        console.log('Connected to Monogo DB');
-    } catch (err) {
-        console.error(err);
-    }
-}
+const PORT = 4000;
+const app = express()
+    // log more info to the console
+    .use(
+        cors({
+            origin: "*",
+        })
+    )
+    .use(morgan("tiny"))
+    .use(express.json())
 
-connect()
+    // any requests for static files will go into the public folder
+    .use(express.static("public"))
 
-app.post('/api/posts', async (req, res) => {
-    console.log(req.body, "req")
+    // endpoints
+    .post("/posts", addPosting)
 
-    const options = {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    };
+    // catch all endpoint
+    .get("*", (req, res) => {
+        res.status(404).json({
+            status: 404,
+            message: "This is obviously not what you are looking for.",
+        });
+    });
 
-    const client = new MongoClient(URI, options);
-
-    // connect to the client
+const setup = async () => {
+    const client = new MongoClient(MONGO_URI, options);
     await client.connect();
+    app.locals.client = client;
+};
 
-    // connect to the database (db name is provided as an argument to the function)
-    const db = client.db("posts");
-
-    // Save the blog post to the MongoDB database
-    const result = await db.collection('posts').insertOne(req.body);
-    res.json({ success: true, postId: result.insertedId });
-});
-
-app.listen(4000, () => {
-    console.log('listening on port 4000')
-})
+setup()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Server is listening on port: ${PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.log("Error: ", err);
+    });

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 
-function BlogForm() {
+function BlogForm(country) {
+    const countryName = country.country;
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [content, setContent] = useState('');
@@ -9,15 +10,16 @@ function BlogForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const bodyData = { _id: "tests", title, author, content }
+        const bodyData = { title, author, content, countryName: countryName }
 
         try {
-            const response = await fetch(proxy + `/api/posts`, {
+            const response = await fetch(proxy + `/posts`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(bodyData),
+
 
             });
 
@@ -27,6 +29,7 @@ function BlogForm() {
             console.error(error);
         }
     };
+
 
     return (
         <form onSubmit={handleSubmit}>

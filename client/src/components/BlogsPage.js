@@ -52,7 +52,7 @@ const BlogsPage = () => {
             <h2>Title</h2>
             <h3>{country} is one of the famous tourist location in the world!</h3>
             <h3>{blogs}</h3>
-            <BlogForm />
+            <BlogForm country={country} />
         </>
 
     );
