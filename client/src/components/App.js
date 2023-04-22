@@ -6,6 +6,7 @@ import PageNotFound from './PageNotFound'
 import ThankYouPage from './ThankYouPage'
 import SearchingPage from './SearchingPage'
 import AgencySupport from './AgencySupport'
+import AllBlogs from './AllBlogs'
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/thankyou" element={<ThankYouPage />} />
         <Route path="/search" element={<SearchingPage />} />
         <Route path="/agency" element={<AgencySupport />} />
+        <Route path="/allblogs" element={<AllBlogs />} />
       </Routes>
     </BrowserRouter>
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const morgan = require("morgan");
-const { addPosting } = require("./handlers");
+const { addPosting, getAllPosts, deletePosting } = require("./handlers");
 const cors = require("cors");
 require("dotenv").config();
 const MONGO_URI = process.env.REACT_APP_MONGO_URI;
@@ -27,6 +27,8 @@ const app = express()
 
     // endpoints
     .post("/posts", addPosting)
+    .get("/allposts", getAllPosts)
+    .delete("/posts", deletePosting)
 
     // catch all endpoint
     .get("*", (req, res) => {
