@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styledComponents from "styled-components";
 import { useNavigate } from "react-router-dom";
 import BlogForm from "./BlogForm";
+import BlogPerCountry from "./BlogPerCountry";
 const BlogsPage = () => {
     const navigate = useNavigate();
     const { country } = useParams();
@@ -53,6 +54,7 @@ const BlogsPage = () => {
             <h2>Title</h2>
             <h3>{country} is one of the famous tourist location in the world!</h3>
             <BlogForm country={country} />
+            <BlogPerCountry country={country} />
             <div>
                 <a href="/allblogs">
                     <button>All country blogs</button>

@@ -12,7 +12,7 @@ const addPosting = async (req, res) => {
         const _id = uuidv4();
         const result = await db
             .collection(collection)
-            .insertOne({ ...req.body, _id });
+            .insertOne({ ...req.body, date: new Date(), _id });
         console.log(result);
         assert.equal(
             _id,
@@ -44,6 +44,25 @@ const getAllPosts = async (req, res) => {
         const result = await db
             .collection(collection)
             .find().toArray();
+        console.log(result);
+        sendResponse({ res, status: 200, data: result });
+    } catch (err) {
+        sendResponse({ res, status: 500, message: err.message });
+    }
+};
+
+const getPostsPerCountry = async (req, res) => {
+    const countryName = req.params.countryName;
+
+    try {
+
+        const client = req.app.locals.client;
+        const db = client.db("posts");
+        const collection = "posts";
+        const _id = uuidv4();
+        const result = await db
+            .collection(collection)
+            .find({ "countryName": countryName }).toArray();
         console.log(result);
         sendResponse({ res, status: 200, data: result });
     } catch (err) {
@@ -82,5 +101,5 @@ const deletePosting = async (req, res) => {
 
 };
 module.exports = {
-    addPosting, getAllPosts, deletePosting
+    addPosting, getAllPosts, deletePosting, getPostsPerCountry
 };

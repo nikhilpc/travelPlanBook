@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import styledComponents from "styled-components";
 import moment from "moment";
 
-const AllBlogs = () => {
+const BlogPerCountry = ({ country }) => {
 
 
     const [maps, setMap] = useState(null);
 
 
     useEffect(() => {
-        fetch("http://localhost:4000/allposts").then((res) => res.json()).then((data) => {
+        fetch(`http://localhost:4000/posts/${country}`).then((res) => res.json()).then((data) => {
             setMap(data.data);
         })
     }, []);
@@ -25,9 +25,8 @@ const AllBlogs = () => {
                             <p key={item.title}>Title : {item.title}</p>
                             <p key={item.author}>Author : {item.author}</p>
                             <p key={item.content}>Content : {item.content}</p>
-                            <p key={item.countryName}>Country : {item.countryName}</p>
                             <p key={item.date}>Created Date :{moment(item.date).utc().format('YYYY-MM-DD')}</p>
-================================================================
+                            ================================================================
                         </BlockData>
                     ))}
                 </>
@@ -45,4 +44,4 @@ const BlockData = styledComponents.div`
     align-items: center;
     color: green;`;
 
-export default AllBlogs;
+export default BlogPerCountry;
