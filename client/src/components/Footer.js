@@ -59,7 +59,7 @@ const Footer = () => {
       <div className="lower-footer">
         <span>
           Copyright &copy; Travel. Created by{" "}
-          <a href="https://github.com/nikhilpc">Nikhil</a>
+          <a href="https://github.com/">Nikhil</a>
         </span>
       </div>
     </Container>

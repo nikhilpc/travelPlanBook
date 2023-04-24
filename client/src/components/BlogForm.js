@@ -7,6 +7,12 @@ function BlogForm(country) {
     const [author, setAuthor] = useState('');
     const [content, setContent] = useState('');
     const proxy = "http://localhost:4000"
+
+    const handleClick = () => {
+
+        alert("Thank you, Your blog has been posted successfully!");
+        window.location.reload();
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -45,7 +51,7 @@ function BlogForm(country) {
                 Content:
                 <textarea value={content} onChange={(e) => setContent(e.target.value)} />
             </label>
-            <button type="submit" onClick={() => alert("Thank you for the form")}>Submit</button>
+            <button type="submit" onClick={handleClick}>Submit</button>
         </form>
     );
 }
