@@ -5,22 +5,22 @@ import moment from "moment";
 const BlogPerCountry = ({ country }) => {
 
 
-    const [maps, setMap] = useState(null);
+    const [blogPosts, setBlogPosts] = useState(null);
 
 
     useEffect(() => {
         fetch(`http://localhost:4000/posts/${country}`).then((res) => res.json()).then((data) => {
-            setMap(data.data);
+            setBlogPosts(data.data);
         })
-    }, []);
+    }, [blogPosts]);
     return (
         <>
 
-            {maps === null ? (
+            {blogPosts === null ? (
                 <>Loading</>
             ) : (
                 <>
-                    {maps.map((item) => (
+                    {blogPosts.map((item) => (
                         <BlockData>
                             <p key={item.title}>Title : {item.title}</p>
                             <p key={item.author}>Author : {item.author}</p>

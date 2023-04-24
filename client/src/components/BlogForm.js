@@ -45,7 +45,7 @@ function BlogForm(country) {
                 Content:
                 <textarea value={content} onChange={(e) => setContent(e.target.value)} />
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit" onClick={() => alert("Thank you for the form")}>Submit</button>
         </form>
     );
 }
