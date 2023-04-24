@@ -7,14 +7,14 @@ import BlogPerCountry from "./BlogPerCountry";
 const BlogsPage = () => {
     const navigate = useNavigate();
     const { country } = useParams();
-    const [maps, setMap] = useState(null);
+    const [blogPosts, setBlogPosts] = useState(null);
 
 
     useEffect(() => {
         fetch(`https://restcountries.com/v3.1/name/${country}/?fullText=true`)
             .then((res) => res.json())
             .then((data) => {
-                setMap(data);
+                setBlogPosts(data);
             });
     }, []);
 
@@ -25,11 +25,11 @@ const BlogsPage = () => {
                 <Heading>Welcome to {country}</Heading>
 
             </BlogPageDiv>
-            {maps === null ? (
+            {blogPosts === null ? (
                 <>Loading</>
             ) : (
                 <>
-                    {maps.map((item) => (
+                    {blogPosts.map((item) => (
                         <BlockData>
                             <div key={item.name.common}>
                                 Country Name : {item.name.common}
@@ -55,16 +55,23 @@ const BlogsPage = () => {
             <h3>{country} is one of the famous tourist location in the world!</h3>
             <BlogForm country={country} />
             <BlogPerCountry country={country} />
-            <div>
+            <DivisionButton>
                 <a href="/allblogs">
-                    <button>All country blogs</button>
+                    <Button>All country blogs</Button>
                 </a>
-            </div>
+            </DivisionButton>
         </>
 
     );
 };
-
+const Button = styledComponents.button`
+color: blue;
+background-color: orange;
+:hover {
+    cursor: pointer;
+background-color: green;}`
+const DivisionButton = styledComponents.div`
+color: blue`
 const BlogPageDiv = styledComponents.div`
 padding-left: 30px;
 display: flex;

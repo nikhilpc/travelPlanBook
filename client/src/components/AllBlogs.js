@@ -12,7 +12,7 @@ const AllBlogs = () => {
         fetch("http://localhost:4000/allposts").then((res) => res.json()).then((data) => {
             setBlogPosts(data.data);
         })
-    }, [blogPosts]);
+    }, []);
     return (
         <>
 

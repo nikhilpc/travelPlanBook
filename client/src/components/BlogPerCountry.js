@@ -12,7 +12,7 @@ const BlogPerCountry = ({ country }) => {
         fetch(`http://localhost:4000/posts/${country}`).then((res) => res.json()).then((data) => {
             setBlogPosts(data.data);
         })
-    }, [blogPosts]);
+    }, []);
     return (
         <>
 
