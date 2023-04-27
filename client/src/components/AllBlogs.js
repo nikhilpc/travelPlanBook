@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styledComponents from "styled-components";
 import moment from "moment";
-
+import { Link } from "react-router-dom";
 const AllBlogs = () => {
 
 
@@ -30,6 +30,9 @@ const AllBlogs = () => {
 ================================================================
                         </BlockData>
                     ))}
+                        <p style={{ textAlign: "center" }}>
+                            <TextLink to="/">Back to Home </TextLink>
+                        </p>
                 </>
             )}
 
@@ -38,7 +41,13 @@ const AllBlogs = () => {
     );
 };
 
-
+const TextLink = styledComponents(Link)`
+position: absolute;
+left: 10px;
+top: 10px;
+font-weight: bold;
+    text-decoration: none;
+    `
 const BlockData = styledComponents.div`
     display: flex;
     flex-direction: column;

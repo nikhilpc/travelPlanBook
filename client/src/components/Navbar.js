@@ -57,9 +57,7 @@ const Navbar = () => {
 
           <LogoutButton />
         </AccountDiv>
-        <div className="search">
-          <IoSearchOutline />
-        </div>
+
       </div>
     </Container>
   );

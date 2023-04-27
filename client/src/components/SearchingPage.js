@@ -33,27 +33,223 @@ const SearchingPage = () => {
             });
     }, []);
 
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
     const fetchSuggestions = (value) => {
-        const suggestions = ['Barbados', 'Suriname', 'Namibia', 'Guinea', 'Vanuatu', 'Samoa', 'France', 'Andorra', 'Azerbaijan', 'Maldives', 'Saint Lucia', 'Panama', 'Timor-Leste', 'North Macedonia', 'Denmark', 'Egypt', 'Estonia', 'Czechia', 'Bahamas', 'Uruguay', 'Comoros', 'Costa Rica', 'Togo', 'São Tomé and Príncipe', 'Netherlands', 'Australia', 'Malaysia', 'Nepal', 'Cuba', 'North Korea', 'Moldova', 'Zambia', 'Dominica', 'Marshall Islands', 'Tonga', 'Peru', 'Cape Verde', 'Kiribati', 'Finland', 'Ivory Coast', 'Pakistan', 'Djibouti', 'Micronesia', 'Slovenia', 'Kyrgyzstan', 'Switzerland', 'Kuwait', 'Seychelles', 'United Kingdom', 'Fiji', 'Yemen', 'Central African Republic', 'Belgium', 'Argentina', 'Madagascar', 'South Africa', 'Latvia', 'Zimbabwe', 'Gabon', 'Romania', 'Germany', 'Bangladesh', 'Jordan', 'Mozambique', 'Israel', 'Eritrea', 'Indonesia', 'Japan', 'Spain', 'Afghanistan', 'United Arab Emirates', 'Malawi', 'Turkey', 'Belarus', 'Montenegro', 'Bosnia and Herzegovina', 'Eswatini', 'Lithuania', 'Turkmenistan', 'Ethiopia', 'Hungary', 'Chad', 'Nigeria', 'San Marino', 'Ukraine', 'Haiti', 'Botswana', 'Portugal', 'Guyana', 'Ireland', 'Mauritius', 'Saint Kitts and Nevis', 'Iceland', 'Chile', 'Kazakhstan', 'China', 'Armenia', 'Bolivia', 'Sudan', 'Vietnam', 'Burundi', 'Canada', 'Colombia', 'Lesotho', 'Guatemala', 'Uzbekistan', 'Senegal', 'Gambia', 'Liechtenstein', 'Tuvalu', 'Equatorial Guinea', 'Bhutan', 'Paraguay', 'Grenada', 'Papua New Guinea', 'Jamaica', 'Republic of the Congo', 'Poland', 'Russia', 'Mauritania', 'Burkina Faso', 'DR Congo', 'Benin', 'Uganda', 'Mongolia', 'Laos', 'Algeria', 'Brunei', 'Kenya', 'Sri Lanka', 'Dominican Republic', 'Austria', 'Luxembourg', 'Georgia', 'Slovakia', 'Norway', 'Thailand', 'India', 'Morocco', 'Nicaragua', 'Qatar', 'Brazil', 'New Zealand', 'Singapore', 'Syria', 'Belize', 'Venezuela', 'Bahrain', 'Cameroon', 'Cyprus', 'United States', 'Angola', 'Tunisia', 'Monaco', 'Rwanda', 'Trinidad and Tobago', 'Malta', 'Mexico', 'Antigua and Barbuda', 'South Korea', 'Niger', 'Albania', 'Somalia', 'Liberia', 'Myanmar', 'Tanzania', 'Iraq', 'Saint Vincent and the Grenadines', 'Libya', 'Sierra Leone', 'Serbia', 'Ghana', 'South Sudan', 'Sweden', 'Greece', 'Philippines', 'Guinea-Bissau', 'Saudi Arabia', 'Palau', 'Bulgaria', 'Nauru', 'Cambodia', 'Italy', 'Mali', 'Iran', 'Tajikistan', 'Oman', 'El Salvador', 'Lebanon', 'Vatican City', 'Ecuador', 'Croatia', 'Solomon Islands', 'Honduras']
-            .filter(suggestion => suggestion.toLowerCase().startsWith(value.toLowerCase()));
+        const suggestions = [
+            "Barbados",
+            "Suriname",
+            "Namibia",
+            "Guinea",
+            "Vanuatu",
+            "Samoa",
+            "France",
+            "Andorra",
+            "Azerbaijan",
+            "Maldives",
+            "Saint Lucia",
+            "Panama",
+            "Timor-Leste",
+            "North Macedonia",
+            "Denmark",
+            "Egypt",
+            "Estonia",
+            "Czechia",
+            "Bahamas",
+            "Uruguay",
+            "Comoros",
+            "Costa Rica",
+            "Togo",
+            "São Tomé and Príncipe",
+            "Netherlands",
+            "Australia",
+            "Malaysia",
+            "Nepal",
+            "Cuba",
+            "North Korea",
+            "Moldova",
+            "Zambia",
+            "Dominica",
+            "Marshall Islands",
+            "Tonga",
+            "Peru",
+            "Cape Verde",
+            "Kiribati",
+            "Finland",
+            "Ivory Coast",
+            "Pakistan",
+            "Djibouti",
+            "Micronesia",
+            "Slovenia",
+            "Kyrgyzstan",
+            "Switzerland",
+            "Kuwait",
+            "Seychelles",
+            "United Kingdom",
+            "Fiji",
+            "Yemen",
+            "Central African Republic",
+            "Belgium",
+            "Argentina",
+            "Madagascar",
+            "South Africa",
+            "Latvia",
+            "Zimbabwe",
+            "Gabon",
+            "Romania",
+            "Germany",
+            "Bangladesh",
+            "Jordan",
+            "Mozambique",
+            "Israel",
+            "Eritrea",
+            "Indonesia",
+            "Japan",
+            "Spain",
+            "Afghanistan",
+            "United Arab Emirates",
+            "Malawi",
+            "Turkey",
+            "Belarus",
+            "Montenegro",
+            "Bosnia and Herzegovina",
+            "Eswatini",
+            "Lithuania",
+            "Turkmenistan",
+            "Ethiopia",
+            "Hungary",
+            "Chad",
+            "Nigeria",
+            "San Marino",
+            "Ukraine",
+            "Haiti",
+            "Botswana",
+            "Portugal",
+            "Guyana",
+            "Ireland",
+            "Mauritius",
+            "Saint Kitts and Nevis",
+            "Iceland",
+            "Chile",
+            "Kazakhstan",
+            "China",
+            "Armenia",
+            "Bolivia",
+            "Sudan",
+            "Vietnam",
+            "Burundi",
+            "Canada",
+            "Colombia",
+            "Lesotho",
+            "Guatemala",
+            "Uzbekistan",
+            "Senegal",
+            "Gambia",
+            "Liechtenstein",
+            "Tuvalu",
+            "Equatorial Guinea",
+            "Bhutan",
+            "Paraguay",
+            "Grenada",
+            "Papua New Guinea",
+            "Jamaica",
+            "Republic of the Congo",
+            "Poland",
+            "Russia",
+            "Mauritania",
+            "Burkina Faso",
+            "DR Congo",
+            "Benin",
+            "Uganda",
+            "Mongolia",
+            "Laos",
+            "Algeria",
+            "Brunei",
+            "Kenya",
+            "Sri Lanka",
+            "Dominican Republic",
+            "Austria",
+            "Luxembourg",
+            "Georgia",
+            "Slovakia",
+            "Norway",
+            "Thailand",
+            "India",
+            "Morocco",
+            "Nicaragua",
+            "Qatar",
+            "Brazil",
+            "New Zealand",
+            "Singapore",
+            "Syria",
+            "Belize",
+            "Venezuela",
+            "Bahrain",
+            "Cameroon",
+            "Cyprus",
+            "United States",
+            "Angola",
+            "Tunisia",
+            "Monaco",
+            "Rwanda",
+            "Trinidad and Tobago",
+            "Malta",
+            "Mexico",
+            "Antigua and Barbuda",
+            "South Korea",
+            "Niger",
+            "Albania",
+            "Somalia",
+            "Liberia",
+            "Myanmar",
+            "Tanzania",
+            "Iraq",
+            "Saint Vincent and the Grenadines",
+            "Libya",
+            "Sierra Leone",
+            "Serbia",
+            "Ghana",
+            "South Sudan",
+            "Sweden",
+            "Greece",
+            "Philippines",
+            "Guinea-Bissau",
+            "Saudi Arabia",
+            "Palau",
+            "Bulgaria",
+            "Nauru",
+            "Cambodia",
+            "Italy",
+            "Mali",
+            "Iran",
+            "Tajikistan",
+            "Oman",
+            "El Salvador",
+            "Lebanon",
+            "Vatican City",
+            "Ecuador",
+            "Croatia",
+            "Solomon Islands",
+            "Honduras",
+        ].filter((suggestion) =>
+            suggestion.toLowerCase().startsWith(value.toLowerCase())
+        );
         setSuggestions(suggestions);
-    }
+    };
     const handleChange = (e) => {
         const value = e.target.value;
         setSearchTerm(value);
 
         // Fetch suggestions based on the input value
         fetchSuggestions(value);
-    }
+    };
 
     const handleSuggestionClick = (suggestion) => {
         setSearchTerm(suggestion);
-        setCountry(suggestion)
+        setCountry(suggestion);
         setSuggestions([]);
-    }
+    };
     return (
         <>
             <Headers>
@@ -61,13 +257,10 @@ const SearchingPage = () => {
                 <LogoutButton />
                 <MainHeading>Budget Travel Guide</MainHeading>
                 <AboutUs to="/about">About Us</AboutUs>
-
             </Headers>
 
-            <Profile >Profile</Profile>
-
+            <Profile>Profile</Profile>
             <BannerImage src={image} alt="logo" />
-
 
             <Division>
                 <Input
@@ -79,8 +272,11 @@ const SearchingPage = () => {
                 />
                 {suggestions.length > 0 && (
                     <UL>
-                        {suggestions.map(suggestion => (
-                            <LI key={suggestion} onClick={() => handleSuggestionClick(suggestion)}>
+                        {suggestions.map((suggestion) => (
+                            <LI
+                                key={suggestion}
+                                onClick={() => handleSuggestionClick(suggestion)}
+                            >
                                 {suggestion}
                             </LI>
                         ))}
@@ -91,9 +287,8 @@ const SearchingPage = () => {
                 Search
             </Button>
 
-
-
             <H1>List of Countries</H1>
+
             <CountryList>
                 {countries.map((country) => (
                     <CountryButton key={country.name.common} onClick={countrySelected}>
@@ -102,10 +297,29 @@ const SearchingPage = () => {
                 ))}
             </CountryList>
         </>
-    )
-}
+    );
+};
 
+const CountryButton = styledComponents.button`
+position: relative;
+            font - size: 8px;
+            padding: 10px;
+            border: 1px solid black;
+            border - radius: 5px;
+            margin: 10px;
+            `;
 
+const CountryList = styledComponents.div`
+position: relative;
+            display: flex;
+           justify-content: center;
+            flex-direction: row;
+             flex-wrap: wrap;
+    background-color: orange;
+    padding: 0px 20px;
+    flex-direction: row;
+    align-items: center;
+            `;
 const LI = styledComponents.li`
             :hover {
                 background - color: yellow;
@@ -115,24 +329,24 @@ const LI = styledComponents.li`
 }
             list-style-type: none
 
-            `
+            `;
 
 const Input = styledComponents.input`
             width: 15vw;
             margin-right: 5px;
-            `
+            `;
 const UL = styledComponents.ul`
             background-color: orange;
             padding: 10px;
             color: black;
             width: 15vw;
-            `
+            `;
 const Division = styledComponents.div`
             position: relative
             display: flex;
             flex-direction: row;
             width: 30vw;
-            `
+            `;
 
 const Headers = styledComponents.div`
 
@@ -153,32 +367,18 @@ const H1 = styledComponents.h1`
             font - size: 12px;
             padding - left: 10px;
             `;
-const CountryButton = styledComponents.button`
-            font - size: 8px;
-            padding: 10px;
-            border: 1px solid black;
-            border - radius: 5px;
-            margin: 10px;
-            `;
 
 const AboutUs = styledComponents(Link)`
             margin - right: 30px;
             text - decoration: none;
             `;
-const CountryList = styledComponents.div`
-            display: flex;
-            flex - wrap: wrap;
-            max-width: 95vw;
-            padding: 0 20px;
-            justify - content: center;
-            `;
+
 const BannerImage = styledComponents.img`
             width: 30 %;
             height: 30 %;
             left: 30vw;
             position: relative;
             `;
-
 
 const Button = styledComponents.button`
 position: relative;
@@ -187,4 +387,4 @@ width: 5vw;
 left: 30vw;
             `;
 
-export default SearchingPage
+export default SearchingPage;

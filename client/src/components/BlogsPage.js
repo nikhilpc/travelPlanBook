@@ -52,28 +52,42 @@ const BlogsPage = () => {
                     ))}
                 </>
             )}
+            <BlogHeading>
+                <h1>Blogs about {country}</h1>
+                <h2>{country} is one of the famous tourist location in the world!</h2>
 
-            <h1>Blogs about {country}</h1>
-            <h3>{country} is one of the famous tourist location in the world!</h3>
-            {isAuthenticated ? <><BlogForm country={country} /></> : <>Please login to add blogs <LoginButton /></>}
+                {isAuthenticated ? <><BlogForm country={country} /></> : <h3>Please login to write blogs <LoginButton /></h3>}
+
+            </BlogHeading>
+
             <BlogPerCountry country={country} />
-            <DivisionButton>
+            <div>
                 <a href="/allblogs">
                     <Button>All country blogs</Button>
                 </a>
-            </DivisionButton>
+            </div>
+
         </>
 
     );
 };
+
+const BlogHeading = styledComponents.div`
+color: maroon;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}`
 const Button = styledComponents.button`
+height: 40px;
+padding:10px;
 color: blue;
 background-color: orange;
 :hover {
     cursor: pointer;
 background-color: green;}`
-const DivisionButton = styledComponents.div`
-color: blue`
+
 const BlogPageDiv = styledComponents.div`
 padding-left: 30px;
 display: flex;
