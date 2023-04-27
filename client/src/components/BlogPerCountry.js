@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import styledComponents from "styled-components";
 import moment from "moment";
 
+
 const BlogPerCountry = ({ country }) => {
 
 
     const [blogPosts, setBlogPosts] = useState(null);
+    const [showContent, setShowContent] = useState(false);
+
+    const toggleContent = () => {
+        setShowContent(!showContent);
+    };
 
 
     useEffect(() => {
@@ -20,7 +26,10 @@ const BlogPerCountry = ({ country }) => {
                 <>Loading</>
             ) : (
                 <>
-                    {blogPosts.map((item) => (
+                    <button onClick={toggleContent}>
+                        {showContent ? `Hide Blogs of ${country}` : `View Blogs of ${country}`}
+                    </button>
+                    {showContent && blogPosts.map((item) => (
                         <BlockData>
                             <p key={item.title}>Title : {item.title}</p>
                             <p key={item.author}>Author : {item.author}</p>

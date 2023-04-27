@@ -23,7 +23,6 @@ const App = () => {
         <Route path="/allblogs" element={<AllBlogs />} />
       </Routes>
     </BrowserRouter>
-
   )
 }
 

@@ -4,10 +4,13 @@ import styledComponents from "styled-components";
 import { useNavigate } from "react-router-dom";
 import BlogForm from "./BlogForm";
 import BlogPerCountry from "./BlogPerCountry";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./LoginButton";
 const BlogsPage = () => {
     const navigate = useNavigate();
     const { country } = useParams();
     const [blogPosts, setBlogPosts] = useState(null);
+    const { user, isAuthenticated } = useAuth0();
 
 
     useEffect(() => {
@@ -53,13 +56,13 @@ const BlogsPage = () => {
             <h1>Blogs about {country}</h1>
             <h2>Title</h2>
             <h3>{country} is one of the famous tourist location in the world!</h3>
-            <BlogForm country={country} />
-            <BlogPerCountry country={country} />
-            <DivisionButton>
-                <a href="/allblogs">
-                    <Button>All country blogs</Button>
-                </a>
-            </DivisionButton>
+            {isAuthenticated ? <><BlogForm country={country} />
+                <BlogPerCountry country={country} />
+                <DivisionButton>
+                    <a href="/allblogs">
+                        <Button>All country blogs</Button>
+                    </a>
+                </DivisionButton></> : <>Please login to add blogs <LoginButton /></>}
         </>
 
     );

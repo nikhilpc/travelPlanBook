@@ -10,8 +10,11 @@ function BlogForm(country) {
 
     const handleClick = () => {
 
-        alert("Thank you, Your blog has been posted successfully!");
-        window.location.reload();
+
+
+        // alert("Thank you, Your blog has been posted successfully!");
+        // window.location.reload();
+
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,17 +44,17 @@ function BlogForm(country) {
         <form onSubmit={handleSubmit}>
             <label>
                 Title:
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <input type="text" value={title} id="title" onChange={(e) => setTitle(e.target.value)} required />
             </label>
             <label>
                 Author:
-                <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
+                <input type="text" value={author} id="author" onChange={(e) => setAuthor(e.target.value)} required />
             </label>
             <label>
                 Content:
-                <textarea value={content} onChange={(e) => setContent(e.target.value)} />
+                <textarea value={content} id="content" onChange={(e) => setContent(e.target.value)} required />
             </label>
-            <button type="submit" onClick={handleClick}>Submit</button>
+            <button type="submit" id="submit-btn" disabled={!(title && author && content)} onClick={handleClick}>Submit</button>
         </form>
     );
 }

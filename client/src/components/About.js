@@ -3,6 +3,7 @@ import bali from "../images/bali.jpeg";
 import greece from "../images/greece.jpeg";
 import india from "../images/india.jpeg";
 import styledComponents from "styled-components";
+import { Link } from 'react-router-dom'
 const About = () => {
   return (
     <Block>
@@ -17,6 +18,9 @@ const About = () => {
         <Img src={greece} alt="Bali"></Img>
         <Img src={india} alt="Bali"></Img>
       </Images>
+      <p style={{ textAlign: "center" }}>
+        <Link to="/">Back to Home </Link>
+      </p>
     </Block>
   );
 };

@@ -28,7 +28,6 @@ const HomePage = () => {
       <Testimonial />
       <DownloadApp />
       <Footer />
-
     </>
   );
 };

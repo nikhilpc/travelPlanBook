@@ -6,9 +6,13 @@ const LoginButton = () => {
 
     return (
         !isAuthenticated && (
-            <Button onClick={() => loginWithRedirect()}>
+            <Button onClick={() => loginWithRedirect({
+                options: {
+                    redirectUri: window.location.origin
+                }
+            })}>
                 Login
-            </Button>
+            </Button >
         )
     )
 }

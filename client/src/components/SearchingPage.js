@@ -101,7 +101,7 @@ const SearchingPage = () => {
                     </CountryButton>
                 ))}
             </CountryList>
-        </ >
+        </>
     )
 }
 
