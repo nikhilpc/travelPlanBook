@@ -54,15 +54,14 @@ const BlogsPage = () => {
             )}
 
             <h1>Blogs about {country}</h1>
-            <h2>Title</h2>
             <h3>{country} is one of the famous tourist location in the world!</h3>
-            {isAuthenticated ? <><BlogForm country={country} />
-                <BlogPerCountry country={country} />
-                <DivisionButton>
-                    <a href="/allblogs">
-                        <Button>All country blogs</Button>
-                    </a>
-                </DivisionButton></> : <>Please login to add blogs <LoginButton /></>}
+            {isAuthenticated ? <><BlogForm country={country} /></> : <>Please login to add blogs <LoginButton /></>}
+            <BlogPerCountry country={country} />
+            <DivisionButton>
+                <a href="/allblogs">
+                    <Button>All country blogs</Button>
+                </a>
+            </DivisionButton>
         </>
 
     );
