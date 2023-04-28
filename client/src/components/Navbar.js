@@ -57,7 +57,6 @@ const Navbar = () => {
 
           <LogoutButton />
         </AccountDiv>
-
       </div>
     </Container>
   );

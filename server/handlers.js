@@ -69,7 +69,7 @@ const getPostsPerCountry = async (req, res) => {
         sendResponse({ res, status: 500, message: err.message });
     }
 };
-const deletePosting = async (req, res) => {
+const updatePosting = async (req, res) => {
 
     try {
 
@@ -99,6 +99,28 @@ const deletePosting = async (req, res) => {
         console.log(error, "error")
     }
 
+};
+const deletePosting = async (req, res) => {
+    const { _id } = req.params;
+
+    try {
+        const client = req.app.locals.client;
+        const db = client.db("posts");
+        const collection1 = "posts";
+        // delete posting from db
+
+        const result = await db.collection(collection1).deleteOne({ _id });
+        assert.equal(1, result.deletedCount, 'Blog not found');
+
+        sendResponse({
+            res,
+            status: 200,
+            data: { result },
+            message: 'Posting was removed.',
+        });
+    } catch (err) {
+        sendResponse({ res, status: 500, message: err.message });
+    }
 };
 module.exports = {
     addPosting, getAllPosts, deletePosting, getPostsPerCountry

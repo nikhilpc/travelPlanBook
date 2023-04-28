@@ -7,18 +7,52 @@ const BlogPerCountry = ({ country }) => {
 
 
     const [blogPosts, setBlogPosts] = useState(null);
-    const [showContent, setShowContent] = useState(false);
+    const [showContent, setShowContent] = useState(true);
 
     const toggleContent = () => {
         setShowContent(!showContent);
     };
+    const deleteBlog = async (item) => {
 
+
+        try {
+            const response = await fetch(`http://localhost:4000/posts/${item._id}`, {
+                method: 'DELETE',
+
+            });
+
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+
+        alert("Thank you, Your blog has been deleted successfully!");
+        window.location.reload();
+    }
+    const editBlog = async (item) => {
+
+        console.log("clicked here ", item);
+        // try {
+        //     const response = await fetch(`http://localhost:4000/posts/${item._id}`, {
+        //         method: 'PATCH',
+
+        //     });
+
+        //     const data = await response.json();
+        //     console.log(data);
+        // } catch (error) {
+        //     console.error(error);
+        // }
+
+    }
 
     useEffect(() => {
         fetch(`http://localhost:4000/posts/${country}`).then((res) => res.json()).then((data) => {
             setBlogPosts(data.data);
         })
     }, []);
+
     return (
         <>
 
@@ -37,7 +71,10 @@ const BlogPerCountry = ({ country }) => {
                                 <p key={item.content}>Content : {item.content}</p>
                                 <p key={item.date}>Created Date :{moment(item.date).utc().format('YYYY-MM-DD')}</p>
                                 ================================================================
+                                <button onClick={() => editBlog(item)}>Update</button>
+                                <button onClick={() => deleteBlog(item)}>Delete</button>
                             </BlockData>
+
                         ))}
                     </Blogs>
                 </>

@@ -10,11 +10,8 @@ function BlogForm(country) {
 
     const handleClick = () => {
 
-
-
-        // alert("Thank you, Your blog has been posted successfully!");
-        // window.location.reload();
-
+        alert("Thank you, Your blog has been posted successfully!");
+        window.location.reload();
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,8 +25,6 @@ function BlogForm(country) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(bodyData),
-
-
             });
 
             const data = await response.json();

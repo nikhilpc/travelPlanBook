@@ -30,7 +30,7 @@ const app = express()
     .get("/allposts", getAllPosts)
     .get("/posts/:countryName", getPostsPerCountry)
 
-    .delete("/posts", deletePosting)
+    .delete("/posts/:_id", deletePosting)
 
     // catch all endpoint
     .get("*", (req, res) => {
