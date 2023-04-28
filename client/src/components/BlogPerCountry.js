@@ -44,8 +44,8 @@ const BlogPerCountry = ({ country, blogPosts, fetchBlogs }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const bodyData = { title, author, content, countryName: country }
+        console.log(new Date(), "date")
+        const bodyData = { title, author, content, countryName: country, date: new Date() }
 
         try {
             const response = await fetch(proxy + `/posts/${editedBlogId}`, {

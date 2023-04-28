@@ -77,20 +77,19 @@ const updatePosting = async (req, res) => {
         const db = client.db("posts");
         const collection = "posts";
         const _id = req.params
-        console.log(_id, "id clas")
+        const bodyContent = { ...req.body }
         const result = await db
             .collection(collection)
             .updateOne(
-                { "_id": req.body._id },
-                { $set: { body: req.body } }
-            );
-        console.log(result, "result...");
+                { "_id": req.params },
+                { $set: { body: bodyContent } });
+
 
         sendResponse({
 
             res,
             status: 201,
-            data: { _id, ...req.body },
+            data: { ...req.body },
             message: 'Posting was updated.',
         });
     } catch (error) {
