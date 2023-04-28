@@ -3,11 +3,14 @@ import styledComponents from "styled-components";
 import moment from "moment";
 
 
-const BlogPerCountry = ({ country }) => {
+const BlogPerCountry = ({ country, blogPosts, fetchBlogs }) => {
 
-
-    const [blogPosts, setBlogPosts] = useState(null);
     const [showContent, setShowContent] = useState(true);
+    const [editedBlogId, setEditedBlogId] = useState(null);
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
+    const [content, setContent] = useState('');
+    const proxy = "http://localhost:4000"
 
     const toggleContent = () => {
         setShowContent(!showContent);
@@ -16,7 +19,7 @@ const BlogPerCountry = ({ country }) => {
 
 
         try {
-            const response = await fetch(`http://localhost:4000/posts/${item._id}`, {
+            const response = await fetch(proxy + `/posts/${item._id}`, {
                 method: 'DELETE',
 
             });
@@ -30,27 +33,48 @@ const BlogPerCountry = ({ country }) => {
         alert("Thank you, Your blog has been deleted successfully!");
         window.location.reload();
     }
+
+
     const editBlog = async (item) => {
-
-        console.log("clicked here ", item);
-        // try {
-        //     const response = await fetch(`http://localhost:4000/posts/${item._id}`, {
-        //         method: 'PATCH',
-
-        //     });
-
-        //     const data = await response.json();
-        //     console.log(data);
-        // } catch (error) {
-        //     console.error(error);
-        // }
-
+        setEditedBlogId(item._id)
+        setTitle(item.title)
+        setAuthor(item.author)
+        setContent(item.content)
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const bodyData = { title, author, content, countryName: country }
+
+        try {
+            const response = await fetch(proxy + `/posts/${editedBlogId}`, {
+                method: 'PATCH',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(bodyData),
+
+            });
+
+
+            const data = await response.json();
+            console.log(data, "data")
+            if (data) {
+                fetchBlogs()
+            }
+
+
+        } catch (error) {
+            console.error(error);
+        }
+
+    };
+
     useEffect(() => {
-        fetch(`http://localhost:4000/posts/${country}`).then((res) => res.json()).then((data) => {
-            setBlogPosts(data.data);
-        })
+        (async () => {
+            fetchBlogs()
+        })()
     }, []);
 
     return (
@@ -71,14 +95,30 @@ const BlogPerCountry = ({ country }) => {
                                 <p key={item.content}>Content : {item.content}</p>
                                 <p key={item.date}>Created Date :{moment(item.date).utc().format('YYYY-MM-DD')}</p>
                                 ================================================================
-                                <button onClick={() => editBlog(item)}>Update</button>
+                                <button onClick={() => editBlog(item)}>Edit</button>
+                                {editedBlogId === item._id && <form onSubmit={handleSubmit}>
+                                    <label>
+                                        Title:
+                                        <input type="text" value={title} id="title" onChange={(e) => setTitle(e.target.value)} required />
+                                    </label>
+                                    <label>
+                                        Author:
+                                        <input type="text" value={author} id="author" onChange={(e) => setAuthor(e.target.value)} required />
+                                    </label>
+                                    <label>
+                                        Content:
+                                        <textarea value={content} id="content" onChange={(e) => setContent(e.target.value)} required />
+                                    </label>
+                                    <button type="submit" id="submit-btn" >Update</button>
+                                </form>}
                                 <button onClick={() => deleteBlog(item)}>Delete</button>
                             </BlockData>
 
                         ))}
                     </Blogs>
                 </>
-            )}
+            )
+            }
 
         </>
 

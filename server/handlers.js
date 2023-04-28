@@ -76,25 +76,25 @@ const updatePosting = async (req, res) => {
         const client = req.app.locals.client;
         const db = client.db("posts");
         const collection = "posts";
-        const _id = uuidv4();
+        const _id = req.params
+        console.log(_id, "id clas")
         const result = await db
             .collection(collection)
-            .insertOne({ ...req.body, _id });
-        console.log(result);
-        assert.equal(
-            _id,
-            result.insertedId,
-            'Duplicate key error: posting with this _id already exists.'
-        );
+            .updateOne(
+                { "_id": req.body._id },
+                { $set: { body: req.body } }
+            );
+        console.log(result, "result...");
+
         sendResponse({
 
             res,
             status: 201,
             data: { _id, ...req.body },
-            message: 'Posting was added.',
+            message: 'Posting was updated.',
         });
     } catch (error) {
-        sendResponse({ res, status: 500, message: err.message });
+        sendResponse({ res, status: 500, message: error.message });
 
         console.log(error, "error")
     }
@@ -123,5 +123,5 @@ const deletePosting = async (req, res) => {
     }
 };
 module.exports = {
-    addPosting, getAllPosts, deletePosting, getPostsPerCountry
+    addPosting, getAllPosts, deletePosting, getPostsPerCountry, updatePosting
 };

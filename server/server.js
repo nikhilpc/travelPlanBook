@@ -1,7 +1,7 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const morgan = require("morgan");
-const { addPosting, getAllPosts, deletePosting, getPostsPerCountry } = require("./handlers");
+const { addPosting, getAllPosts, deletePosting, getPostsPerCountry, updatePosting } = require("./handlers");
 const cors = require("cors");
 require("dotenv").config();
 const MONGO_URI = process.env.REACT_APP_MONGO_URI;
@@ -29,7 +29,7 @@ const app = express()
     .post("/posts", addPosting)
     .get("/allposts", getAllPosts)
     .get("/posts/:countryName", getPostsPerCountry)
-
+    .patch("/posts/:_id", updatePosting)
     .delete("/posts/:_id", deletePosting)
 
     // catch all endpoint

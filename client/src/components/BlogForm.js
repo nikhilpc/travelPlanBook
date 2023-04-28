@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 
 
-function BlogForm(country) {
-    const countryName = country.country;
+const BlogForm = ({ country, fetchBlogs }) => {
+    const countryName = country;
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [content, setContent] = useState('');
     const proxy = "http://localhost:4000"
 
-    const handleClick = () => {
 
-        alert("Thank you, Your blog has been posted successfully!");
-        window.location.reload();
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -28,6 +24,9 @@ function BlogForm(country) {
             });
 
             const data = await response.json();
+            if (data) {
+                fetchBlogs()
+            }
             console.log(data);
         } catch (error) {
             console.error(error);
@@ -49,7 +48,7 @@ function BlogForm(country) {
                 Content:
                 <textarea value={content} id="content" onChange={(e) => setContent(e.target.value)} required />
             </label>
-            <button type="submit" id="submit-btn" disabled={!(title && author && content)} onClick={handleClick}>Submit</button>
+            <button type="submit" id="submit-btn" disabled={!(title && author && content)}>Submit</button>
         </form>
     );
 }

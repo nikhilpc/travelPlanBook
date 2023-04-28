@@ -7,17 +7,24 @@ import BlogPerCountry from "./BlogPerCountry";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./LoginButton";
 const BlogsPage = () => {
+
     const navigate = useNavigate();
     const { country } = useParams();
-    const [blogPosts, setBlogPosts] = useState(null);
+    const [countryDetails, setCountryDetails] = useState(null);
     const { user, isAuthenticated } = useAuth0();
-
+    const [blogPosts, setBlogPosts] = useState(null);
+    const fetchBlogs = async () => {
+        const data = await fetch(`http://localhost:4000/posts/${country}`)
+        const blogs = await data.json()
+        console.log(blogs, "Blogs from fetch")
+        setBlogPosts(blogs.data)
+    }
 
     useEffect(() => {
         fetch(`https://restcountries.com/v3.1/name/${country}/?fullText=true`)
             .then((res) => res.json())
             .then((data) => {
-                setBlogPosts(data);
+                setCountryDetails(data);
             });
     }, []);
 
@@ -28,11 +35,11 @@ const BlogsPage = () => {
                 <Heading>Welcome to {country}</Heading>
 
             </BlogPageDiv>
-            {blogPosts === null ? (
+            {countryDetails === null ? (
                 <>Loading</>
             ) : (
                 <>
-                    {blogPosts.map((item) => (
+                    {countryDetails.map((item) => (
                         <BlockData>
                             <div key={item.name.common}>
                                 Country Name : {item.name.common}
@@ -56,11 +63,11 @@ const BlogsPage = () => {
                 <h1>Blogs about {country}</h1>
                 <h2>{country} is one of the famous tourist location in the world!</h2>
 
-                {isAuthenticated ? <><BlogForm country={country} /></> : <h3>Please login to write blogs <LoginButton /></h3>}
+                {isAuthenticated ? <BlogForm country={country} fetchBlogs={fetchBlogs} /> : <h3>Please login to write blogs <LoginButton /></h3>}
 
             </BlogHeading>
 
-            <BlogPerCountry country={country} />
+            <BlogPerCountry country={country} blogPosts={blogPosts} fetchBlogs={fetchBlogs} />
             <div>
                 <a href="/allblogs">
                     <Button>All country blogs</Button>
