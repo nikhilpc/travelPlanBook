@@ -46,7 +46,7 @@ const BlogPerCountry = ({ country, blogPosts, fetchBlogs }) => {
         e.preventDefault();
         console.log(new Date(), "date")
         const bodyData = { title, author, content, countryName: country, date: new Date() }
-
+        console.log(bodyData, "bodyData")
         try {
             const response = await fetch(proxy + `/posts/${editedBlogId}`, {
                 method: 'PATCH',
