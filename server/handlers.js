@@ -78,12 +78,12 @@ const updatePosting = async (req, res) => {
         const collection = "posts";
         const _id = req.params._id;
         console.log(_id, "_id value is here")
-        const { title, author, content } = req.body
+        const { title, author, content, date } = req.body
         const result = await db
             .collection(collection)
             .updateOne(
                 { "_id": _id },
-                { $set: { title: title, author: author, content: content } });
+                { $set: { title: title, author: author, content: content, date: new Date() } });
 
         sendResponse({
 
