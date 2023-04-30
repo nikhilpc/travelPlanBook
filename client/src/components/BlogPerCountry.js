@@ -93,7 +93,7 @@ const BlogPerCountry = ({ country, blogPosts, fetchBlogs }) => {
                                 <p key={item.title}>Title : {item.title}</p>
                                 <p key={item.author}>Author : {item.author}</p>
                                 <p key={item.content}>Content : {item.content}</p>
-                                <p key={item.date}>Created Date :{moment(item.date).utc().format('YYYY-MM-DD')}</p>
+                                <p key={item.date}>Date :{moment(item.date).utc().format('YYYY-MM-DD')}</p>
                                 ================================================================
                                 <button onClick={() => editBlog(item)}>Edit</button>
                                 {editedBlogId === item._id && <form onSubmit={handleSubmit}>

@@ -26,7 +26,7 @@ const AllBlogs = () => {
                             <p key={item.author}>Author : {item.author}</p>
                             <p key={item.content}>Content : {item.content}</p>
                             <p key={item.countryName}>Country : {item.countryName}</p>
-                            <p key={item.date}>Created Date :{moment(item.date).utc().format('YYYY-MM-DD')}</p>
+                            <p key={item.date}>Date :{moment(item.date).utc().format('YYYY-MM-DD')}</p>
 ================================================================
                         </BlockData>
                     ))}
